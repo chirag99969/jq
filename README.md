@@ -11,3 +11,8 @@ aws configservice describe-config-rules --region us-west-1 --profile AWS-Volterr
 ```
 aws configservice describe-config-rules --region us-west-1 --profile AWS-Volterra-prod-secops | jq '.ConfigRules[]|select(.ConfigRuleName|test("^z_."))|.ConfigRuleName'
 ```
+
+### ConfigRuleStatus=ACTIVE and multiple columns
+```
+aws configservice describe-config-rules --region us-west-1 --profile AWS-Volterra-prod-secops | jq -r '.ConfigRules[]|select(.ConfigRuleState=="ACTIVE")|.ConfigRuleName+ " " +.ConfigRuleState'
+```
